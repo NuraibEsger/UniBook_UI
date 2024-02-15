@@ -1,21 +1,20 @@
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react'
-import React, { useRef } from 'react'
+import React from 'react'
 import useSignInModal from '../hooks/useSignInModal'
 import { useSelector } from 'react-redux';
 
 function SignInModal() {
     const { onOpen, onClose, formik, isOpen } = useSignInModal();
-    const {userName} = useSelector((x) => x.account);
+    const {userName} = useSelector(state => state.account);
 
 
   return (
     <>
        {userName ?? (
         <Button onClick={onOpen} variant={"link"}>
-            Sign In
+          Sign In
         </Button>
-
-       )}
+      )}
 
       <Modal
         isOpen={isOpen}

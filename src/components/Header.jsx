@@ -1,11 +1,14 @@
 import { CloseIcon } from '@chakra-ui/icons'
 import { Box, Button, Center, Flex, Stack, Tab, TabList, Tabs } from '@chakra-ui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SignInModal from './SignInModal'
+import { logoutAction } from "../redux/slices/accountSlice";
 
 function Header() {
+
+    const { userName } = useSelector((x) => x.account);
+    const dispatch = useDispatch();
 
   return (
     <Flex
@@ -27,12 +30,20 @@ function Header() {
             </Tabs>
         </Flex>
         <Flex>
+            
+            <SignInModal />
             <Stack direction={"row"}>
-                <SignInModal />
-                <Button>
+            {userName ? (
+                <Button
+                    onClick={() => dispatch(logoutAction())}
+                >
                     Log Out
                 </Button>
+            ):(
+               <Button>Sign Up</Button> 
+            )}
             </Stack>
+            
         </Flex>
     </Flex>
   )

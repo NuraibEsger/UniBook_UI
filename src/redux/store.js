@@ -5,12 +5,12 @@ import { persistReducer } from "redux-persist";
 import accountSlice from "./slices/accountSlice";
 
 const reducers = combineReducers({
-  account: accountSlice,
+  account: accountSlice
 });
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage:  storage,
   whitelist: ["account"],
 };
 

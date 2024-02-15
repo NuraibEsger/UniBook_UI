@@ -17,10 +17,9 @@ export default function useSignInModal() {
             password:"",
             confirmPassword:""
         },
-        onSubmit:(values) =>{
+        onSubmit:(values) => {
             loginPost(values)
-                .then((resp) =>{
-                    console.log(resp);
+                .then((resp) => {
                     dispatch(loginAction(resp.data))
                     onClose();
                 })
