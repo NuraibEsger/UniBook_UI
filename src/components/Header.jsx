@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import SignInModal from './SignInModal'
 import { logoutAction } from "../redux/slices/accountSlice";
 import RegisterModal from './RegisterModal'
+import { useNavigate } from 'react-router-dom'
 
 function Header() {
 
     const { userName } = useSelector((x) => x.account);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
   return (
     <Flex
@@ -26,14 +28,14 @@ function Header() {
         <Flex>
             <Tabs variant="soft-rounded" colorScheme="green">
                 <TabList>
-                    <Tab>Home</Tab>
+                    <Tab onClick={() => navigate("/")}>Home</Tab>
                 </TabList>
             </Tabs>
         </Flex>
         <Flex>
             <Stack direction={"row"}>
             <SignInModal />
-            {userName? (
+            {userName ? (
                 <Button
                     onClick={() => dispatch(logoutAction())}
                 >

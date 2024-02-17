@@ -12,14 +12,12 @@ import { persistStore } from "redux-persist";
 let persistor = persistStore(store)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <ChakraProvider theme={customTheme}>
           <ColorModeScript initialColorMode={"dark"} />
-          <App />
+            <App />
         </ChakraProvider>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
 )
