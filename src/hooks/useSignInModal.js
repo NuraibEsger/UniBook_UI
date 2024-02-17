@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { loginAction } from '../redux/slices/accountSlice'
 import { useDisclosure } from '@chakra-ui/react'
 import { loginSchema } from '../validations/loginSchema'
+import { jwtDecode } from 'jwt-decode'
 
 export default function useSignInModal() {
 
@@ -20,7 +21,11 @@ export default function useSignInModal() {
         onSubmit:(values) => {
             loginPost(values)
                 .then((resp) => {
-                    dispatch(loginAction(resp.data))
+                    const token = resp.data;
+                    const decoded = jwtDecode(token);
+                    const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+                    const userName = decoded.UserName
+                    dispatch(loginAction({ token, userName, role }))
                     onClose();
                 })
                 .catch((e) => {

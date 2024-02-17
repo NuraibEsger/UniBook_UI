@@ -1,9 +1,10 @@
 import { CloseIcon } from '@chakra-ui/icons'
-import { Box, Button, Center, Flex, Stack, Tab, TabList, Tabs } from '@chakra-ui/react'
+import { Box, Button, Center, Container, Flex, Stack, Tab, TabList, Tabs } from '@chakra-ui/react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SignInModal from './SignInModal'
 import { logoutAction } from "../redux/slices/accountSlice";
+import RegisterModal from './RegisterModal'
 
 function Header() {
 
@@ -19,7 +20,7 @@ function Header() {
     w="100%"
     mb={8}
     p={8}
-    bg={["primary.500", "primary.500", "transparent", "transparent"]}
+    bgColor={"Black"}
     color={["white", "white", "primary.700", "primary.700"]}
     >
         <Flex>
@@ -30,20 +31,18 @@ function Header() {
             </Tabs>
         </Flex>
         <Flex>
-            
-            <SignInModal />
             <Stack direction={"row"}>
-            {userName ? (
+            <SignInModal />
+            {userName? (
                 <Button
                     onClick={() => dispatch(logoutAction())}
                 >
                     Log Out
                 </Button>
             ):(
-               <Button>Sign Up</Button> 
+               <RegisterModal />
             )}
             </Stack>
-            
         </Flex>
     </Flex>
   )
