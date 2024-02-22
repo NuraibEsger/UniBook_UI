@@ -11,7 +11,7 @@ export default function Layout() {
         <Header />
         <Flex 
             flexDir="row"
-            gap={20}
+            gap={60}
         >
             <SideBar />
             <Outlet />

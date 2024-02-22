@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { FiCalendar, FiHome, FiMenu } from 'react-icons/fi';
+import { FiCalendar, FiFile, FiFileText, FiHome, FiMenu, FiUser } from 'react-icons/fi';
 import { Flex, IconButton, Divider } from '@chakra-ui/react';
 import NavItem from './NavItem';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 function SideBar() {
     const [navSize, changeNavSize] = useState("large");
     const [activeItem, setActiveItem] = useState("Dashboard"); // Initial active item
+    const navigate = useNavigate();
+    const {role} = useSelector(x=>x.account)
 
-    const handleItemClick = (title) => {
+    const handleItemClick = (title, route) => {
         setActiveItem(title);
+        navigate(route);
     };
 
     return (
@@ -38,15 +43,24 @@ function SideBar() {
                     icon={FiHome}
                     title="Dashboard"
                     active={activeItem === "Dashboard"}
-                    onClick={() => handleItemClick("Dashboard")}
+                    onClick={() => handleItemClick("Dashboard", "/")}
                 />
                 <NavItem
                     navSize={navSize}
                     icon={FiCalendar}
                     title="Calendar"
                     active={activeItem === "Calendar"}
-                    onClick={() => handleItemClick("Calendar")}
+                    onClick={() => handleItemClick("Calendar", "Calendar")}
                 />
+                {role === "Rector" && (
+                    <NavItem
+                        navSize={navSize}
+                        icon={FiUser}
+                        title="Users"
+                        active={activeItem === "Users"}
+                        onClick={() => handleItemClick("Users", "Users")}
+                    />
+                )}
             </Flex>
 
             <Flex p="5%" flexDir="column" w="100%" alignItems={navSize === "small" ? "center" : "flex-start"} mb={4}>
