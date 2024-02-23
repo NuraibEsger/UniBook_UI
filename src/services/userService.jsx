@@ -1,8 +1,7 @@
 import { httpClient } from "../utils/httpClient";
 
 export const getUsers = (token) => {
-
-    return httpClient.get("/user",{
+        return httpClient.get("/user",{
         headers: {
             Authorization: `Bearer ${token}`,
         },

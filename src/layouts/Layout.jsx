@@ -3,11 +3,11 @@ import Header from '../components/Header'
 import { Outlet } from 'react-router-dom'
 import Footer from '../components/Footer'
 import SideBar from '../components/SideBar/SideBar'
-import { Flex } from '@chakra-ui/react'
+import { Flex, Grid } from '@chakra-ui/react'
 
 export default function Layout() {
   return (
-    <>
+    <Grid>
         <Header />
         <Flex 
             flexDir="row"
@@ -17,6 +17,6 @@ export default function Layout() {
             <Outlet />
         </Flex>
         <Footer />
-    </>
+    </Grid>
   )
 }
