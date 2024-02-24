@@ -8,6 +8,6 @@ export default function AddButton({ onClick, userType }) {
   };
 
   return (
-        <Button backgroundColor={"#AEC8CA"} onClick={handleClick}>Add {userType}</Button>
+        <Button display="none" _groupHover={{ display: 'block' }} backgroundColor={"#AEC8CA"} onClick={handleClick}>Add {userType}</Button>
   )
 }

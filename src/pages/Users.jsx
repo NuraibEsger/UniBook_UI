@@ -1,6 +1,7 @@
-import { Box, Card, CardBody, CardHeader, Center, Flex, Heading, Spinner, Stack, StackDivider, Text, useToast } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Container, Fade, Flex, Heading, Spinner, Text, VStack, useColorModeValue, useToast } from '@chakra-ui/react'
 import { getUsers, postStudent, postTeacher } from '../services/userService'
 import { useSelector } from "react-redux";
+import {motion} from 'framer-motion'
 import React from 'react'
 import { useMutation, useQuery,} from 'react-query';
 import AddButton from '../components/AddButton';
@@ -92,36 +93,65 @@ export default function Users() {
         return <h2>No data available</h2>;
     }
 
-    if(role !== "Rector") return null
+    const bg = useColorModeValue('white', '#2f3244');
 
     return (
-        <Center>
-            <Flex gap={300}>
-                <Card>
-                    <CardHeader>
-                        <Heading size='md'>User dashboard</Heading>
-                    </CardHeader>
-                    <CardBody >
-                        <Stack flexDir="row" flexWrap="wrap" gap={20} divider={<StackDivider />} spacing='4'>
-                            {data.data.map((user) => (
-                                <Box key={user.id}>
-                                    <Heading size='xs' textTransform='uppercase'>
-                                        {user.email}
-                                    </Heading>
-                                    <Text pt='2' fontSize='sm'>
-                                        {user.name} {user.surname}  
-                                    </Text>
-                                    <Flex gap={10}>
-                                        <AddButton onClick={(userType) => handleAddStudent(user.id, userType)} userType="Student"/>
-                                        <AddButton onClick={(userType) => handleAddTeacher(user.id, userType)} userType="Teacher"/>
-                                    </Flex>
-                                </Box>
-                            ))}
-                        </Stack>
-                    </CardBody>
-                </Card>
-            </Flex>
+        <Container maxW="7xl" p={{base:5, md:10}}> 
+        <Center gap={60} flexWrap="wrap">
+            {data.data.map((user) =>(
+                <Box
+                key={user.id}
+                maxH="400px"
+                minH="354px"
+                w="345px"
+                boxShadow="lg"
+                rounded="md"
+                p={6}
+                overflow="hidden"
+                cursor="pointer"
+                _hover={{ boxShadow: 'lg' }}
+                bg={bg}
+                role="group"
+                >
+                    <VStack spacing={5}>
+                        <motion.div whileHover={{y:-5, scale:1.1}}>
+                            <Box shadow="xl" _hover={{boxShadow:'lg'}} borderRadius="full">
+                                <Avatar />
+                            </Box>
+                        </motion.div>
+                        <Heading fontSize="xl" fontFamily="body" textTransform="capitalize" noOfLines={2}>
+                            {user.email}
+                        </Heading>
+                        <Text
+                        color="gray.500"
+                        fontSize="lg"
+                        noOfLines={{ base: 3, md: 4 }}
+                        _groupHover={{ display: 'none' }}
+                        display="block"
+                        >
+                            Student
+                        </Text>
+                        <Fade in>
+                            <Text
+                            color="gray.500"
+                            fontSize="lg"
+                            noOfLines={{ base: 3, md: 4 }}
+                            _groupHover={{ display: 'block' }}
+                            display="none"
+                            >
+                                {user.name} {user.surname}
+                            </Text>
+                            <Flex gap={5}>
+                                <AddButton onClick={(userType) => handleAddStudent(user.id, userType)} userType="Student"/>
+                                <AddButton onClick={(userType) => handleAddTeacher(user.id, userType)} userType="Teacher"/>
+                            </Flex>
+                        </Fade>
+                    </VStack>
+                </Box>
+            ))}
         </Center>
+    </Container>
+                            
     );
 }
 

@@ -10,7 +10,6 @@ export default function Layout() {
     <Grid>
         <Header />
         <Flex 
-            flexDir="row"
             gap={60}
         >
             <SideBar />

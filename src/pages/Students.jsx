@@ -1,7 +1,8 @@
-import { Box, Button, Card, CardBody, CardHeader, Center, Flex, Heading, Spinner, Stack, StackDivider, Text, useToast } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Container, Fade, Heading, Spinner, Text, VStack, useColorModeValue, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useMutation, useQuery } from 'react-query';
 import { deleteStudents, getStudents } from '../services/studentService';
+import {motion} from 'framer-motion'
 import { useSelector } from 'react-redux';
 
 export default function Students() {
@@ -61,31 +62,66 @@ export default function Students() {
     const deleteStudent = (userId) => {
         mutation.mutate(userId)
     }
+    
+    const bg = useColorModeValue('white', '#2f3244');
 
   return (
-    <Center>
-        <Flex gap={300}>
-            <Card>
-                <CardHeader>
-                    <Heading size='md'>Student dashboard</Heading>
-                </CardHeader>
-                <CardBody>
-                    <Stack  flexDir="row" flexWrap="wrap" gap={20} divider={<StackDivider />} spacing='4'>
-                        {data.data.map((student)=>(
-                            <Box key={student.id}>
-                                <Heading justifyContent="center" size='x' textTransform='uppercase'>
-                                    {student.email}
-                                </Heading>
-                                <Text pt='2' fontSize='m'>
-                                    {student.name} {student.surname}  
-                                </Text>
-                                <Button onClick={() => deleteStudent(student.id)} mt={10} colorScheme='red'>Delete student</Button>
+    <Container maxW="7xl" p={{base:5, md:10}}> 
+        <Center gap={60} flexWrap="wrap">
+            {data.data.map((student) =>(
+                <Box
+                key={student.id}
+                maxH="400px"
+                minH="354px"
+                w="345px"
+                boxShadow="lg"
+                rounded="md"
+                p={6}
+                overflow="hidden"
+                cursor="pointer"
+                _hover={{ boxShadow: 'lg' }}
+                bg={bg}
+                role="group"
+                >
+                    <VStack spacing={5}>
+                        <motion.div whileHover={{y:-5, scale:1.1}}>
+                            <Box shadow="xl" _hover={{boxShadow:'lg'}} borderRadius="full">
+                                <Avatar />
                             </Box>
-                        ))}
-                    </Stack>
-                </CardBody>
-            </Card>
-      </Flex>
-    </Center>
+                        </motion.div>
+                        <Heading fontSize="xl" fontFamily="body" textTransform="capitalize" noOfLines={2}>
+                            {student.email}
+                        </Heading>
+                        <Text
+                        color="gray.500"
+                        fontSize="lg"
+                        noOfLines={{ base: 3, md: 4 }}
+                        _groupHover={{ display: 'none' }}
+                        display="block"
+                        >
+                            Student
+                        </Text>
+                        <Fade in>
+                            <Text
+                            color="gray.500"
+                            fontSize="lg"
+                            noOfLines={{ base: 3, md: 4 }}
+                            _groupHover={{ display: 'block' }}
+                            display="none"
+                            >
+                                {student.name} {student.surname}
+                            </Text>
+                            <Button 
+                            _groupHover={{ display: 'block' }}
+                            display="none" 
+                            onClick={() => deleteStudent(student.id)} mt={10} colorScheme='red'
+                            >Delete student
+                            </Button>
+                        </Fade>
+                    </VStack>
+                </Box>
+            ))}
+        </Center>
+    </Container>
   )
 }
