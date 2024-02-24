@@ -1,5 +1,5 @@
 import { Box, Card, CardBody, CardHeader, Center, Flex, Heading, Spinner, Stack, StackDivider, Text, useToast } from '@chakra-ui/react'
-import { getUsers, postStudent } from '../services/userService'
+import { getUsers, postStudent, postTeacher } from '../services/userService'
 import { useSelector } from "react-redux";
 import React from 'react'
 import { useMutation, useQuery,} from 'react-query';
@@ -15,12 +15,33 @@ export default function Users() {
         return getUsers(token)
     },{
         cacheTime: 5000,
-        refetchOnMount: false,
     });
 
-    console.log(token);
+    const mutationStudent = useMutation((userId) => postStudent(userId, token), {
+        onSuccess: () => {
+            toast({
+                title: "Success Post",
+                description: "Changed role",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+                position: "top-right"
+            })
+            refetch();
+        },
+        onError: (error) => {
+            toast({
+                title: "Error",
+                description: error.message,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+                position: "top-right"
+            });
+        }
+    });
 
-    const mutation = useMutation((userId) => postStudent(userId, token), {
+    const mutationTeacher = useMutation((userId) => postTeacher(userId, token), {
         onSuccess: () => {
             toast({
                 title: "Success Post",
@@ -45,8 +66,12 @@ export default function Users() {
     });
     
     const handleAddStudent = (userId, userType) => {
-        mutation.mutate(userId, userType)
+        mutationStudent.mutate(userId, userType)
     };
+
+    const handleAddTeacher = (userId, userType) =>{
+        mutationTeacher.mutate(userId,userType)
+    }
 
     if (isLoading) {
         return <Spinner />
@@ -87,8 +112,8 @@ export default function Users() {
                                         {user.name} {user.surname}  
                                     </Text>
                                     <Flex gap={10}>
-                                        <AddButton onClick={(userId, userType) => handleAddStudent(user.id, userType)} userType="Student"/>
-                                        <AddButton onClick={(userId, userType) => handleAddStudent(user.id, userType)} userType="Teacher"/>
+                                        <AddButton onClick={(userType) => handleAddStudent(user.id, userType)} userType="Student"/>
+                                        <AddButton onClick={(userType) => handleAddTeacher(user.id, userType)} userType="Teacher"/>
                                     </Flex>
                                 </Box>
                             ))}

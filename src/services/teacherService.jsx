@@ -1,16 +1,16 @@
 import { httpClient } from "../utils/httpClient";
 
-export const getStudents = (token) => {
+export const getTeachers = (token) => {
 
-    return httpClient.get("/student",{
+    return httpClient.get("/teacher",{
         headers: {
             Authorization: `Bearer ${token}`,
         },
     });
 };
 
-export const deleteStudents = (userId, token) => {
-    return httpClient.delete(`/student/${userId}`,{
+export const deleteTeacher = (userId, token) => {
+    return httpClient.delete(`/teacher/${userId}`,{
         headers: {
             Authorization: `Bearer ${token}`,
         },

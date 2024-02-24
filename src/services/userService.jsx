@@ -15,3 +15,11 @@ export const postStudent = (data, token) =>{
         },
     })
 }
+
+export const postTeacher = (data, token) =>{
+    return httpClient.post("/teacher", data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+}

@@ -6,6 +6,8 @@ import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Users from './pages/Users'
 import Students from './pages/Students';
+import Teachers from './pages/Teachers';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 function App() {
   const queryClient = new QueryClient();
@@ -16,8 +18,24 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
-              <Route path="/Users" element={<Users />} />
-              <Route path='/Students' element={<Students />} />
+              <Route path="/Users" element=
+              {
+                <ProtectedRoute>
+                  <Users />
+                </ProtectedRoute>
+              } />
+              <Route path='/Students' element=
+              {
+                <ProtectedRoute>
+                  <Students />
+                </ProtectedRoute>
+              } />
+              <Route path='/Teachers' element=
+              {
+                <ProtectedRoute>
+                  <Teachers />
+                </ProtectedRoute>
+              }/>
               <Route path="/*" element={<NotFound />} />
             </Route>
           </Routes>
