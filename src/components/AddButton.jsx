@@ -1,4 +1,4 @@
-import { Button, Flex } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import React from 'react'
 
 export default function AddButton({ onClick, userType }) {
@@ -8,6 +8,6 @@ export default function AddButton({ onClick, userType }) {
   };
 
   return (
-        <Button display="none" _groupHover={{ display: 'block' }} backgroundColor={"#AEC8CA"} onClick={handleClick}>Add {userType}</Button>
+        <Button mt={10} display="none" _groupHover={{ display: 'block' }} backgroundColor={"#AEC8CA"} onClick={handleClick}>Add {userType}</Button>
   )
 }

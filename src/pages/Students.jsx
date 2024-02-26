@@ -41,7 +41,7 @@ export default function Students() {
     });
 
     if(isLoading){
-        return <Spinner />
+        return <Center><Spinner/></Center>
     }
 
     if(isError){
@@ -56,18 +56,17 @@ export default function Students() {
     }
 
     if (!data || !data.data || !Array.isArray(data.data) || data.data.length == 0) {
-        return <h2>No data available</h2>;
+        return <Center><Heading>No data available</Heading></Center>
     }
 
     const deleteStudent = (userId) => {
         mutation.mutate(userId)
     }
     
-    const bg = useColorModeValue('white', '#2f3244');
 
   return (
     <Container maxW="7xl" p={{base:5, md:10}}> 
-        <Center gap={60} flexWrap="wrap">
+        <Center gap={30} flexWrap="wrap">
             {data.data.map((student) =>(
                 <Box
                 key={student.id}
@@ -78,9 +77,7 @@ export default function Students() {
                 rounded="md"
                 p={6}
                 overflow="hidden"
-                cursor="pointer"
                 _hover={{ boxShadow: 'lg' }}
-                bg={bg}
                 role="group"
                 >
                     <VStack spacing={5}>

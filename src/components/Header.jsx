@@ -1,11 +1,12 @@
-import { CloseIcon } from '@chakra-ui/icons'
-import { Box, Button, Center, Container, Flex, Stack, Tab, TabList, Tabs } from '@chakra-ui/react'
+import { Avatar, Button, Flex, Icon, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Stack, Tab, TabList, Tabs } from '@chakra-ui/react'
 import React from 'react'
+import { SettingsIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from 'react-redux'
 import SignInModal from './SignInModal'
 import { logoutAction } from "../redux/slices/accountSlice";
 import RegisterModal from './RegisterModal'
 import { useNavigate } from 'react-router-dom'
+import SubjectCreate from './SubjectCreate';
 
 function Header() {
 
@@ -20,7 +21,6 @@ function Header() {
     justify="space-between"
     wrap="wrap"
     w="100%"
-    mb={8}
     p={8}
     bgColor={"Black"}
     color={["white", "white", "primary.700", "primary.700"]}
@@ -32,20 +32,39 @@ function Header() {
                 </TabList>
             </Tabs>
         </Flex>
-        <Flex>
-            <Stack direction={"row"}>
-            <SignInModal />
-            {userName ? (
-                <Button
-                    onClick={() => dispatch(logoutAction())}
-                >
-                    Log Out
-                </Button>
+        <Flex gap={5} alignItems={'center'}>
+                <SubjectCreate />
+
+                <SignInModal />
+                {userName ? (
+                    <Menu>
+                    
+                  <MenuButton
+                    as={Button}
+                    rounded={'full'}
+                    variant={'link'}
+                    cursor={'pointer'}
+                    minW={0}>
+                    <Avatar
+                      size={'sm'}
+                    />
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem cursor={"default"}>{userName}</MenuItem>
+                    <MenuItem onClick={() => navigate("/Settings")}>
+                    <Icon as={SettingsIcon} mr={2} /> Settings
+                    </MenuItem>
+                    <MenuDivider />
+                    <MenuItem onClick={() => dispatch(logoutAction())}>
+                      Log out
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
             ):(
-               <RegisterModal />
+                <RegisterModal />
             )}
-            </Stack>
-        </Flex>
+            
+          </Flex>
     </Flex>
   )
 }

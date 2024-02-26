@@ -10,3 +10,12 @@ export default function ProtectedRoute({children}) {
     children
   )
 }
+
+export function ProtectedRouteForTeachers({children}){
+    const {role} = useSelector((x) => x.account)
+    if(role !== "Rector" && "Teacher") return <Navigate to={'/*'} />
+
+    return(
+      children
+    )
+}

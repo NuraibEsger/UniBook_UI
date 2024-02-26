@@ -9,7 +9,9 @@ function SignInModal() {
 
   return (
     <>
-       {userName ?? (
+       {userName ? (
+         <></>
+      ):(
         <Button style={{color:"white"}} onClick={onOpen} variant={"link"}>
           Sign In
         </Button>

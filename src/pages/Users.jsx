@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Center, Container, Fade, Flex, Heading, Spinner, Text, VStack, useColorModeValue, useToast } from '@chakra-ui/react'
+import { Avatar, Box, Center, Container, Fade, Flex, Heading, Spinner, Text, VStack, useColorModeValue, useToast } from '@chakra-ui/react'
 import { getUsers, postStudent, postTeacher } from '../services/userService'
 import { useSelector } from "react-redux";
 import {motion} from 'framer-motion'
@@ -10,7 +10,7 @@ export default function Users() {
     
     const toast = useToast();
     
-    const { token, role } = useSelector(x => x.account);
+    const { token } = useSelector(x => x.account);
 
     const { isLoading, data, isError, error, refetch, isFetching } = useQuery("Users", () =>{
         return getUsers(token)
@@ -75,7 +75,7 @@ export default function Users() {
     }
 
     if (isLoading) {
-        return <Spinner />
+        return <Center><Spinner/></Center>
     }
 
     if(isError){
@@ -90,14 +90,13 @@ export default function Users() {
     }
 
     if (!data || !data.data || !Array.isArray(data.data) || data.data.length == 0) {
-        return <h2>No data available</h2>;
+        return <Center><Heading>No data available</Heading></Center>
     }
 
-    const bg = useColorModeValue('white', '#2f3244');
 
     return (
         <Container maxW="7xl" p={{base:5, md:10}}> 
-        <Center gap={60} flexWrap="wrap">
+        <Center gap={30} flexWrap="wrap">
             {data.data.map((user) =>(
                 <Box
                 key={user.id}
@@ -108,9 +107,7 @@ export default function Users() {
                 rounded="md"
                 p={6}
                 overflow="hidden"
-                cursor="pointer"
                 _hover={{ boxShadow: 'lg' }}
-                bg={bg}
                 role="group"
                 >
                     <VStack spacing={5}>
@@ -151,7 +148,6 @@ export default function Users() {
             ))}
         </Center>
     </Container>
-                            
     );
 }
 

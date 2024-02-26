@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FiCalendar, FiFile, FiFileText, FiHome, FiMenu, FiUser } from 'react-icons/fi';
-import { Flex, IconButton, Divider } from '@chakra-ui/react';
+import { FiCalendar, FiHome, FiMenu, FiUser } from 'react-icons/fi';
+import { Flex, IconButton } from '@chakra-ui/react';
 import NavItem from './NavItem';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
@@ -20,7 +20,6 @@ function SideBar() {
         <Flex
             pos="sticky"
             left="5"
-            h="95vh"
             marginTop="2.5vh"
             boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
             borderRadius={navSize === "small" ? "15px" : "30px"}
@@ -83,8 +82,6 @@ function SideBar() {
 
             <Flex p="5%" flexDir="column" w="100%" alignItems={navSize === "small" ? "center" : "flex-start"} mb={4}>
             </Flex>
-            <Divider display={navSize === "small" ? "none" : "flex"} />
-            <Flex></Flex>
         </Flex>
     );
 }

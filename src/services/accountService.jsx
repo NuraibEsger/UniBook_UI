@@ -7,3 +7,7 @@ export const loginPost = (data) => {
 export const registerPost = (data) => {
     return httpClient.post("/account/register", data);
 };
+
+export const confirmEmail = (token, email) => {
+    return httpClient.post(`/account/confirmEmail?token=${token}&email=${email}`);
+};
