@@ -8,8 +8,9 @@ import Users from './pages/Users'
 import Students from './pages/Students';
 import Teachers from './pages/Teachers';
 import ProtectedRoute from './utils/ProtectedRoute';
-import Subject from './pages/Subject';
+import Subjects from './pages/Subjects';
 import ConfirmEmail from './pages/ConfirmEmail';
+import UserGroup from './pages/UserGroup';
 
 function App() {
   const queryClient = new QueryClient();
@@ -41,9 +42,10 @@ function App() {
               <Route path='/Subjects' element=
               {
                 <ProtectedRoute>
-                  <Subject />
+                  <Subjects />
                 </ProtectedRoute>
               } />
+              <Route path='/UserGroup/:id' element={<UserGroup />}/>
               <Route path='EmailConfirmation' element={<ConfirmEmail />} />
               <Route path="/*" element={<NotFound />} />
             </Route>

@@ -1,10 +1,10 @@
 import { useFormik } from 'formik'
 import React from 'react'
-import { loginPost } from '../services/accountService'
+import { loginPost } from '../../services/accountService'
 import { useDispatch } from 'react-redux'
-import { loginAction } from '../redux/slices/accountSlice'
+import { loginAction } from '../../redux/slices/accountSlice'
 import { useDisclosure } from '@chakra-ui/react'
-import { loginSchema } from '../validations/loginSchema'
+import { loginSchema } from '../../validations/loginSchema'
 import { jwtDecode } from 'jwt-decode'
 
 export default function useSignInModal() {

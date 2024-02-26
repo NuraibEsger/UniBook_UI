@@ -2,9 +2,9 @@
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
-import { subjectSchema } from '../validations/subjectSchema';
+import { subjectSchema } from '../../validations/subjectSchema';
 import { useMutation, useQueryClient } from 'react-query';
-import { postSubject } from '../services/subjectService';
+import { postSubject } from '../../services/subjectService';
 
 export default function useSubjectCreate() {
   const { isOpen, onOpen, onClose } = useDisclosure();

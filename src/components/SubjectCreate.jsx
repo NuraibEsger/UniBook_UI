@@ -1,7 +1,7 @@
 // SubjectCreate.js
 import React from 'react';
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react';
-import useSubjectCreate from '../hooks/useSubjectCreate';
+import useSubjectCreate from '../hooks/Subject/useSubjectCreate';
 
 export default function SubjectCreate({ refetchSubjects  }) {
   const { isOpen, onOpen, onClose, formik } = useSubjectCreate(refetchSubjects);

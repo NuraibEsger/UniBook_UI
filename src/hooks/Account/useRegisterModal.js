@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
-import { registerPost } from '../services/accountService';
-import { registerSchema } from '../validations/registerSchema';
+import { registerPost } from '../../services/accountService';
+import { registerSchema } from '../../validations/registerSchema';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 
 function useRegisterModal() {

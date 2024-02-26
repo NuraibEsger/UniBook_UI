@@ -1,16 +1,19 @@
 import { Box, Button, Card, CardBody, CardHeader, Center, Divider, Flex, Heading, Spinner, Stack, StackDivider, Text, useToast } from '@chakra-ui/react'
 import React from 'react'
-import { useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { deleteSubject, getSubjects } from '../services/subjectService'
 import { useSelector } from 'react-redux'
+import SubjectUpdate from '../components/SubjectUpdate'
 
-export default function Subject() {
+export default function Subjects() {
 
     const toast = useToast();
 
     const {token} = useSelector(x=>x.account);
 
-    const {isLoading, data, isError, error, refetch} = useQuery("Subjects", () =>{
+    const queryClient = useQueryClient();
+
+    const {isLoading, data, isError, error} = useQuery("Subjects", () =>{
         return getSubjects(token)
 
     },{
@@ -26,8 +29,8 @@ export default function Subject() {
                 duration: 3000,
                 isClosable: true,
                 position: "top-right"
-            })
-            refetch();
+            }),
+            queryClient.invalidateQueries('Subjects');
         },
         onError: (error) => {
             toast({
@@ -84,7 +87,7 @@ export default function Subject() {
                             </Box>
                             <Flex gap={5}>
                                 <Button onClick={() => handleDeleteSubject(sbj.id)} colorScheme='red'>Delete</Button>
-                                <Button fontWeight={1} bgColor={"#AEC8CA"}>Update</Button>
+                                <SubjectUpdate subjectId={sbj.id} initialValues={{ name: sbj.name, description: sbj.description }} fontWeight={1} bgColor={"#AEC8CA"} />
                             </Flex>
                             
                     </Stack>
