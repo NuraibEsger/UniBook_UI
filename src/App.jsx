@@ -7,10 +7,11 @@ import NotFound from './pages/NotFound'
 import Users from './pages/Users'
 import Students from './pages/Students';
 import Teachers from './pages/Teachers';
-import ProtectedRoute from './utils/ProtectedRoute';
+import ProtectedRoute, { ProtectedRouteForStuTeach } from './utils/ProtectedRoute';
 import Subjects from './pages/Subjects';
 import ConfirmEmail from './pages/ConfirmEmail';
 import UserGroup from './pages/UserGroup';
+import Groups from './pages/Groups';
 
 function App() {
   const queryClient = new QueryClient();
@@ -44,6 +45,12 @@ function App() {
                 <ProtectedRoute>
                   <Subjects />
                 </ProtectedRoute>
+              } />
+              <Route path='/Groups' element=
+              {
+                <ProtectedRouteForStuTeach>
+                  <Groups />
+                </ProtectedRouteForStuTeach>
               } />
               <Route path='/UserGroup/:id' element={<UserGroup />}/>
               <Route path='EmailConfirmation' element={<ConfirmEmail />} />

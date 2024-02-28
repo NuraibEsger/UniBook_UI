@@ -10,8 +10,8 @@ export const getUserGroup = (token) => {
     });
 };
 
-export const getUserGroupById = (usergroupId, token) => {
-    return httpClient.get(`/usergroup/${usergroupId}`, {
+export const getUserGroupById = (userId, token) => {
+    return httpClient.get(`/usergroup/${userId}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },

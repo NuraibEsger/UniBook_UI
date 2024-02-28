@@ -89,7 +89,6 @@ export default function Subjects() {
                                 <Button onClick={() => handleDeleteSubject(sbj.id)} colorScheme='red'>Delete</Button>
                                 <SubjectUpdate subjectId={sbj.id} initialValues={{ name: sbj.name, description: sbj.description }} fontWeight={1} bgColor={"#AEC8CA"} />
                             </Flex>
-                            
                     </Stack>
                 </CardBody>
             </Card>

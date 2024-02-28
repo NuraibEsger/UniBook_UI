@@ -10,7 +10,7 @@ import SubjectCreate from './SubjectCreate';
 
 function Header() {
 
-    const { userName } = useSelector((x) => x.account);
+    const { userName, role } = useSelector((x) => x.account);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -33,7 +33,8 @@ function Header() {
             </Tabs>
         </Flex>
         <Flex gap={5} alignItems={'center'}>
-                <SubjectCreate />
+                {role === 'Rector' && <SubjectCreate />}
+
 
                 <SignInModal />
                 {userName ? (

@@ -4,6 +4,7 @@ const initialState = {
     token: null,
     userName: null,
     role: null,
+    id: null,
   }
 
 export const accountSlice = createSlice({
@@ -11,10 +12,11 @@ export const accountSlice = createSlice({
   initialState,
   reducers: {
     loginAction: (state, action) => {
-      const { token, userName, role } = action.payload;
+      const { token, userName, role, id } = action.payload;
       state.token = token,
       state.userName = userName,
-      state.role = role
+      state.role = role,
+      state.id = id
     },
     logoutAction: (state) => {
         return initialState

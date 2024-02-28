@@ -78,6 +78,26 @@ function SideBar() {
                         onClick={() => handleItemClick("Teachers", "Teachers")}
                     />
                 )}
+                {role === "Teacher" && (
+                    <NavItem
+                        navSize={navSize}
+                        icon={FiUser}
+                        title="Groups"
+                        active={activeItem === "Groups"}
+                        onClick={() => handleItemClick("Groups", "Groups")}
+                    />
+                )}
+
+                {role === "Student" && (
+                    <NavItem
+                        navSize={navSize}
+                        icon={FiUser}
+                        title="Groups"
+                        active={activeItem === "Groups"}
+                        onClick={() => handleItemClick("Groups", "Groups")}
+                    />
+                )}
+
             </Flex>
 
             <Flex p="5%" flexDir="column" w="100%" alignItems={navSize === "small" ? "center" : "flex-start"} mb={4}>
