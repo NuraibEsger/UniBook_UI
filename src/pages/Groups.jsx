@@ -4,6 +4,7 @@ import { Box, Button, Card, CardBody, CardHeader, Center, Flex, Heading, Spinner
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { getUserGroupById } from '../services/userGroupService';
+import { useNavigate } from 'react-router-dom';
 
 export default function Groups() {
 
@@ -11,11 +12,14 @@ export default function Groups() {
   
     const { id, token } = useSelector(x=>x.account);
 
+    const navigate = useNavigate();
+
     const {isLoading, data, isError, error} = useQuery("Groups", () =>{
         return getUserGroupById( id, token)
     },{
         cacheTime:5000,
     })
+
 
     if(isLoading){
       return <Center><Spinner/></Center>
@@ -34,6 +38,10 @@ export default function Groups() {
 
     if (!data || !data.data || !Array.isArray(data.data) || data.data.length == 0) {
       return <Center><Heading>No data available</Heading ></Center>
+    }
+
+    const handleViewDetail = (groupId) =>{
+        navigate(`/Groups/${groupId}`)
     }
 
   return (
@@ -55,7 +63,7 @@ export default function Groups() {
                                 </Text>
                             </Box>
                             <Flex gap={5}>
-                                <Button bgColor={"#AEC8CA"}>View Detail</Button>
+                                <Button onClick={() => handleViewDetail(ug.groupId)} bgColor={"#AEC8CA"}>View Detail</Button>
                             </Flex>
                     </Stack>
                 </CardBody>

@@ -12,6 +12,7 @@ import Subjects from './pages/Subjects';
 import ConfirmEmail from './pages/ConfirmEmail';
 import UserGroup from './pages/UserGroup';
 import Groups from './pages/Groups';
+import GroupDetail from './pages/GroupDetail';
 
 function App() {
   const queryClient = new QueryClient();
@@ -50,6 +51,12 @@ function App() {
               {
                 <ProtectedRouteForStuTeach>
                   <Groups />
+                </ProtectedRouteForStuTeach>
+              } />
+              <Route path='/Groups/:id' element=
+              {
+                <ProtectedRouteForStuTeach>
+                  <GroupDetail />
                 </ProtectedRouteForStuTeach>
               } />
               <Route path='/UserGroup/:id' element={<UserGroup />}/>
