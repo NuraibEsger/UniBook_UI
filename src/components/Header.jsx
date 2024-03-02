@@ -7,10 +7,11 @@ import { logoutAction } from "../redux/slices/accountSlice";
 import RegisterModal from './RegisterModal'
 import { useNavigate } from 'react-router-dom'
 import SubjectCreate from './SubjectCreate';
+import DepartmentCreate from './DepartmentCreate';
 
 function Header() {
 
-    const { userName, role } = useSelector((x) => x.account);
+    const { userName, role ,token } = useSelector((x) => x.account);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -33,9 +34,8 @@ function Header() {
             </Tabs>
         </Flex>
         <Flex gap={5} alignItems={'center'}>
+                {role === 'Rector' && <DepartmentCreate />}
                 {role === 'Rector' && <SubjectCreate />}
-
-
                 <SignInModal />
                 {userName ? (
                     <Menu>

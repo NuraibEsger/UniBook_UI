@@ -1,11 +1,11 @@
-import { Box, Button, Card, CardBody, CardHeader, Center, Flex, Heading, Spinner, Stack, StackDivider, Text, useToast } from '@chakra-ui/react'
 import React from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { deleteSubject, getSubjects } from '../services/subjectService'
-import { useSelector } from 'react-redux'
-import SubjectUpdate from '../components/SubjectUpdate'
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { Box, Button, Card, CardBody, CardHeader, Center, Flex, Heading, Spinner, Stack, StackDivider, Text, useToast } from '@chakra-ui/react'
+import { useSelector } from 'react-redux';
+import { deleteDepartment, getDepartments } from '../services/departmentService';
+import DepartmentUpdate from '../components/DepartmentUpdate';
 
-export default function Subjects() {
+export default function Department() {
 
     const toast = useToast();
 
@@ -13,24 +13,24 @@ export default function Subjects() {
 
     const queryClient = useQueryClient();
 
-    const {isLoading, data, isError, error} = useQuery("Subjects", () =>{
-        return getSubjects(token)
+    const {isLoading, data, isError, error} = useQuery("Departments", () =>{
+        return getDepartments(token)
 
     },{
         cacheTime:5000,
     })
 
-    const deleteMutation = useMutation((subjectId) => deleteSubject(subjectId, token),{
+    const deleteMutation = useMutation((departmentId) => deleteDepartment(departmentId, token),{
         onSuccess: () => {
             toast({
                 title: "Success Delete",
-                description: "Changed role",
+                description: "Department was deleted",
                 status: "success",
                 duration: 3000,
                 isClosable: true,
                 position: "top-right"
             }),
-            queryClient.invalidateQueries('Subjects');
+            queryClient.invalidateQueries('Departments');
         },
         onError: (error) => {
             toast({
@@ -63,31 +63,31 @@ export default function Subjects() {
         return <Center><Heading>No data available</Heading></Center>
     }
 
-    const handleDeleteSubject = (subjectId) =>{
-        deleteMutation.mutate(subjectId)
+    const handleDeleteDepartment = (departmentId) =>{
+        deleteMutation.mutate(departmentId)
     }
 
   return (
     <Center>
         <Flex mt={20} gap={300} flexWrap="wrap">
-        {data.data.map((sbj)=>(
-            <Card key={sbj.id}>
+        {data.data.map((dep)=>(
+            <Card key={dep.id}>
                 <CardHeader>
-                    <Heading size='md'>Subject dashboard</Heading>
+                    <Heading size='md'>Department dashboard</Heading>
                 </CardHeader>
                 <CardBody>
                     <Stack flexDir="column" flexWrap="wrap" gap={5} divider={<StackDivider />} spacing='4'>
-                            <Box key={sbj.id}>
+                            <Box key={dep.id}>
                                 <Heading justifyContent="center" size='x' textTransform='uppercase'>
-                                    {sbj.name}
+                                    {dep.name}
                                 </Heading>
                                 <Text pt='2' fontSize='m'>
-                                    {sbj.description}
+                                    {dep.description}
                                 </Text>
                             </Box>
                             <Flex gap={5}>
-                                <Button onClick={() => handleDeleteSubject(sbj.id)} colorScheme='red'>Delete</Button>
-                                <SubjectUpdate subjectId={sbj.id} initialValues={{ name: sbj.name, description: sbj.description }} fontWeight={1} bgColor={"#AEC8CA"} />
+                                <Button onClick={() => handleDeleteDepartment(dep.id)} colorScheme='red'>Delete</Button>
+                                <DepartmentUpdate departmentId={dep.id} initialValues={{ name: dep.name}} fontWeight={1} bgColor={"#AEC8CA"} />
                             </Flex>
                     </Stack>
                 </CardBody>

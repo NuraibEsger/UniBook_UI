@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiCalendar, FiHome, FiMenu, FiUser } from 'react-icons/fi';
+import { FaBook, FaCubes } from "react-icons/fa";
 import { Flex, IconButton } from '@chakra-ui/react';
 import NavItem from './NavItem';
 import { useNavigate } from 'react-router-dom';
@@ -40,9 +41,9 @@ function SideBar() {
                 <NavItem
                     navSize={navSize}
                     icon={FiHome}
-                    title="Dashboard"
-                    active={activeItem === "Dashboard"}
-                    onClick={() => handleItemClick("Dashboard", "/")}
+                    title="Home"
+                    active={activeItem === "Home"}
+                    onClick={() => handleItemClick("Home", "/")}
                 />
                 <NavItem
                     navSize={navSize}
@@ -51,6 +52,24 @@ function SideBar() {
                     active={activeItem === "Calendar"}
                     onClick={() => handleItemClick("Calendar", "Calendar")}
                 />
+                {role === "Rector" && (
+                    <NavItem
+                        navSize={navSize}
+                        icon={FaCubes}
+                        title="Departments"
+                        active={activeItem === "Departments"}
+                        onClick={() => handleItemClick("Departments", "Departments")}
+                    />
+                )}
+                {role === "Rector" && (
+                    <NavItem
+                        navSize={navSize}
+                        icon={FaBook}
+                        title="Subjects"
+                        active={activeItem === "Subjects"}
+                        onClick={() => handleItemClick("Subjects", "Subjects")}
+                    />
+                )}
                 {role === "Rector" && (
                     <NavItem
                         navSize={navSize}

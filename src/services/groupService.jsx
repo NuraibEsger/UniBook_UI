@@ -1,8 +1,6 @@
 import { httpClient } from "../utils/httpClient";
 
 export const getGroup = (token) => {
-
-    
     return httpClient.get("/group",{
         headers: {
             Authorization: `Bearer ${token}`,

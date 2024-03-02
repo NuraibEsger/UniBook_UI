@@ -13,6 +13,8 @@ import ConfirmEmail from './pages/ConfirmEmail';
 import UserGroup from './pages/UserGroup';
 import Groups from './pages/Groups';
 import GroupDetail from './pages/GroupDetail';
+import Department from './pages/Department';
+import AdminGroup from './pages/AdminGroup';
 
 function App() {
   const queryClient = new QueryClient();
@@ -23,6 +25,18 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
+              <Route path="/Departments" element=
+              {
+                <ProtectedRoute>
+                  <Department />
+                </ProtectedRoute>
+              } />
+              <Route path="/Groups" element=
+              {
+                <ProtectedRoute>
+                  <AdminGroup />
+                </ProtectedRoute>
+              } />
               <Route path="/Users" element=
               {
                 <ProtectedRoute>

@@ -37,8 +37,6 @@ export default function GroupDetail() {
 
     const group = data.data;
 
-    console.log(group);
-
     return (
         <Center flexDir="column ">
             <Text
