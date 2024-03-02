@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Box, Button, Card, CardBody, CardHeader, Center, Flex, Heading, Spinner, Stack, StackDivider, Text, useToast } from '@chakra-ui/react'
 import { useSelector } from 'react-redux';
 import { deleteDepartment, getDepartments } from '../services/departmentService';
-import DepartmentUpdate from '../components/DepartmentUpdate';
+import DepartmentUpdate from '../components/Department/DepartmentUpdate';
 
 export default function Department() {
 

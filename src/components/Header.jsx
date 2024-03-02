@@ -2,12 +2,13 @@ import { Avatar, Button, Flex, Icon, Menu, MenuButton, MenuDivider, MenuItem, Me
 import React from 'react'
 import { SettingsIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from 'react-redux'
-import SignInModal from './SignInModal'
+import SignInModal from './Account/SignInModal'
 import { logoutAction } from "../redux/slices/accountSlice";
-import RegisterModal from './RegisterModal'
+import RegisterModal from './Account/RegisterModal'
 import { useNavigate } from 'react-router-dom'
-import SubjectCreate from './SubjectCreate';
-import DepartmentCreate from './DepartmentCreate';
+import SubjectCreate from './Subject/SubjectCreate';
+import DepartmentCreate from './Department/DepartmentCreate';
+import GroupCreate from './Group/GroupCreate';
 
 function Header() {
 
@@ -35,6 +36,7 @@ function Header() {
         </Flex>
         <Flex gap={5} alignItems={'center'}>
                 {role === 'Rector' && <DepartmentCreate />}
+                {role === 'Rector' && <GroupCreate />}
                 {role === 'Rector' && <SubjectCreate />}
                 <SignInModal />
                 {userName ? (

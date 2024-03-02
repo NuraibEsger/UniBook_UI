@@ -1,7 +1,7 @@
 // SubjectUpdate.js
 import React from 'react';
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react';
-import useSubjectUpdate from '../hooks/Subject/useSubjectUpdate';
+import useSubjectUpdate from '../../hooks/Subject/useSubjectUpdate';
 import { useSelector } from 'react-redux';
 export default function SubjectUpdate({ subjectId, initialValues }) {
 

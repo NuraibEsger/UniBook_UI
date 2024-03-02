@@ -1,50 +1,31 @@
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react'
 import React from 'react'
-import useRegisterModal from '../hooks/Account/useRegisterModal';
+import { useSelector } from 'react-redux';
+import useSignInModal from '../../hooks/Account/useSignInModal';
 
-function RegisterModal() {
-
-    const { onOpen, isOpen, onClose, formik } = useRegisterModal();
+function SignInModal() {
+    const { onOpen, onClose, formik, isOpen } = useSignInModal();
+    const {userName} = useSelector(state => state.account);
 
   return (
-
     <>
+       {userName ? (
+         <></>
+      ):(
         <Button style={{color:"white"}} onClick={onOpen} variant={"link"}>
-            Sign Up
+          Sign In
         </Button>
-        <Modal
+      )}
+
+      <Modal
         isOpen={isOpen}
         onClose={onClose}
-        >
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Create your account</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Name</FormLabel>
-              <Input 
-              name="name" 
-              placeholder='Name' 
-              onChange={formik.handleChange}
-              value={formik.values.name}
-              />
-              {formik.errors.name && formik.touched.name && (
-                <span style={{ color: "red" }}>{formik.errors.name}</span>
-              )}
-            </FormControl>
-            <FormControl>
-              <FormLabel>Surname</FormLabel>
-              <Input 
-              name="surname" 
-              placeholder='Surname' 
-              onChange={formik.handleChange}
-              value={formik.values.surname}
-              />
-              {formik.errors.surname && formik.touched.surname && (
-                <span style={{ color: "red" }}>{formik.errors.surname}</span>
-              )}
-            </FormControl>
             <FormControl>
               <FormLabel>Email</FormLabel>
               <Input 
@@ -94,9 +75,7 @@ function RegisterModal() {
         </ModalContent>
       </Modal>
     </>
-
-    
   )
 }
 
-export default RegisterModal
+export default SignInModal

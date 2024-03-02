@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiCalendar, FiHome, FiMenu, FiUser } from 'react-icons/fi';
-import { FaBook, FaCubes } from "react-icons/fa";
+import { FaBook, FaCubes, FaLayerGroup } from "react-icons/fa";
 import { Flex, IconButton } from '@chakra-ui/react';
 import NavItem from './NavItem';
 import { useNavigate } from 'react-router-dom';
@@ -59,6 +59,15 @@ function SideBar() {
                         title="Departments"
                         active={activeItem === "Departments"}
                         onClick={() => handleItemClick("Departments", "Departments")}
+                    />
+                )}
+                {role === "Rector" && (
+                    <NavItem
+                        navSize={navSize}
+                        icon={FaLayerGroup}
+                        title="All Groups"
+                        active={activeItem === "All Groups"}
+                        onClick={() => handleItemClick("All Groups", "Groups")}
                     />
                 )}
                 {role === "Rector" && (

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react';
-import useDepartmentUpdate from '../hooks/Department/useDepartmentUpdate';
+import useDepartmentUpdate from '../../hooks/Department/useDepartmentUpdate';
 
 export default function DepartmentUpdate({ departmentId, initialValues }) {
   const { isOpen, onOpen, onClose, formik } = useDepartmentUpdate(departmentId, initialValues);
@@ -9,13 +9,13 @@ export default function DepartmentUpdate({ departmentId, initialValues }) {
   return (
     <>
       <Button bgColor="#AEC8CA" onClick={onOpen}>
-        Create Department
+        Update Department
       </Button>
     
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create Department</ModalHeader>
+          <ModalHeader>Update Department</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl>

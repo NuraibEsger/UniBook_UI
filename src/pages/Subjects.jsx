@@ -3,7 +3,7 @@ import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { deleteSubject, getSubjects } from '../services/subjectService'
 import { useSelector } from 'react-redux'
-import SubjectUpdate from '../components/SubjectUpdate'
+import SubjectUpdate from '../components/Subject/SubjectUpdate'
 
 export default function Subjects() {
 

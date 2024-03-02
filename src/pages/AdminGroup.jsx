@@ -23,7 +23,7 @@ export default function AdminGroup() {
       onSuccess: () => {
           toast({
               title: "Success Delete",
-              description: "Changed role",
+              description: "Deleted Group",
               status: "success",
               duration: 3000,
               isClosable: true,
