@@ -99,21 +99,23 @@ export default function Teachers() {
                             {teacher.subjectName}
                         </Text>
                         <Fade in>
-                            <Text
-                            color="gray.500"
-                            fontSize="lg"
-                            noOfLines={{ base: 3, md: 4 }}
-                            _groupHover={{ display: 'block' }}
-                            display="none"
-                            >
-                                {teacher.name} {teacher.surname}
-                            </Text>
-                            <Button 
-                            _groupHover={{ display: 'block' }}
-                            display="none" 
-                            onClick={() => handleDeleteTeacher(teacher.id)} mt={10} colorScheme='red'
-                            >Delete student
-                            </Button>
+                            <Center flexDir="column">
+                                <Text
+                                color="gray.500"
+                                fontSize="lg"
+                                noOfLines={{ base: 3, md: 4 }}
+                                _groupHover={{ display: 'block' }}
+                                display="none"
+                                >
+                                    {teacher.name} {teacher.surname}
+                                </Text>
+                                <Button 
+                                _groupHover={{ display: 'block' }}
+                                display="none" 
+                                onClick={() => handleDeleteTeacher(teacher.id)} mt={10} colorScheme='red'
+                                >Delete student
+                                </Button>
+                            </Center>
                         </Fade>
                     </VStack>
                 </Box>

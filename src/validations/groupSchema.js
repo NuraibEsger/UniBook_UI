@@ -7,3 +7,7 @@ export const groupSchema = Yup.object().shape({
     .required("Required!"),
     departmentId: Yup.number().typeError("!Required").required("Required")
 })
+
+export const addToGroupSchema = Yup.object().shape({
+    groupId: Yup.number().typeError("!Required").required("Required")
+})

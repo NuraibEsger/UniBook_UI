@@ -129,19 +129,21 @@ export default function Users() {
                             Student
                         </Text>
                         <Fade in>
-                            <Text
-                            color="gray.500"
-                            fontSize="lg"
-                            noOfLines={{ base: 3, md: 4 }}
-                            _groupHover={{ display: 'block' }}
-                            display="none"
-                            >
-                                {user.name} {user.surname}
-                            </Text>
-                            <Flex gap={5}>
-                                <AddButton onClick={(userType) => handleAddStudent(user.id, userType)} userType="Student"/>
-                                <AddButton onClick={(userType) => handleAddTeacher(user.id, userType)} userType="Teacher"/>
-                            </Flex>
+                            <Center flexDir="column">
+                                <Text
+                                color="gray.500"
+                                fontSize="lg"
+                                noOfLines={{ base: 3, md: 4 }}
+                                _groupHover={{ display: 'block' }}
+                                display="none"
+                                >
+                                    {user.name} {user.surname}
+                                </Text>
+                                <Flex gap={5}>
+                                    <AddButton onClick={(userType) => handleAddStudent(user.id, userType)} userType="Student"/>
+                                    <AddButton onClick={(userType) => handleAddTeacher(user.id, userType)} userType="Teacher"/>
+                                </Flex>
+                            </Center>
                         </Fade>
                     </VStack>
                 </Box>

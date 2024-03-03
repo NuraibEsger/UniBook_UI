@@ -1,13 +1,14 @@
-import React from 'react';
+import React from 'react'
 import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Spinner } from '@chakra-ui/react';
+import { getGroup } from '../../services/groupService';
+import useAddToGroup from '../../hooks/Group/useAddToGroup';
 import { useQuery } from 'react-query';
-import { getDepartments } from '../../services/departmentService';
-import useGroupCreate from '../../hooks/Group/useGroupCreate';
 
-export default function GroupCreate() {
-  const { isOpen, onOpen, onClose, formik, seletRef } = useGroupCreate();
+export default function AddToGroup({userId}) {
 
-  const { data, isLoading, isError } = useQuery('Departments', getDepartments);
+  const { isOpen, onOpen, onClose, formik, seletRef } = useAddToGroup(userId);
+
+  const { data, isLoading, isError } = useQuery('Groups', getGroup);
 
   if(isLoading){
     return <Center><Spinner/></Center>
@@ -26,7 +27,7 @@ export default function GroupCreate() {
 
   return (
     <>
-      <Button bgColor="#AEC8CA" onClick={onOpen}>
+      <Button  _groupHover={{ display: 'block' }} mt={5} display="none"  bgColor="#AEC8CA" onClick={onOpen}>
         Create Group
       </Button>
     
@@ -37,24 +38,11 @@ export default function GroupCreate() {
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
-              <FormLabel>Group name</FormLabel>
-              <Input 
-                name='name'
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.errors.name && formik.touched.name && (
-                <span style={{ color: "red" }}>{formik.errors.name}</span>
-              )}
-            </FormControl>
-            <FormControl>
-              <FormLabel>Department</FormLabel>
-
+              <FormLabel>Groups</FormLabel>
               <Select
                 ref={seletRef}
-                name="departmentId"
-                value={formik.values.departmentId}
+                name="groupId"
+                value={formik.values.groupId}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               >
@@ -64,11 +52,11 @@ export default function GroupCreate() {
                 {data.data.map((x, i) => (
                     <option key={i} value={x.id}>
                       {x.name}
-                    </option>
+                </option>
                 ))}
               </Select>
-              {formik.errors.departmentId && formik.touched.departmentId && (
-                <span style={{ color: "red" }}>{formik.errors.departmentId}</span>
+              {formik.errors.groupId && formik.touched.groupId && (
+                <span style={{ color: "red" }}>{formik.errors.groupId}</span>
               )}
             </FormControl>
           </ModalBody>

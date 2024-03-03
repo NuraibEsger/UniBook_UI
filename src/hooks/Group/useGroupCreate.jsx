@@ -28,7 +28,7 @@ export default function useGroupCreate() {
           formik.resetForm();
           seletRef.current.value = "default"
           onClose();
-          queryClient.invalidateQueries('Departments  ');
+          queryClient.invalidateQueries('Departments');
         },
         onError: (error) => {
           toast({
@@ -45,7 +45,7 @@ export default function useGroupCreate() {
       const formik = useFormik({
         initialValues: {
           name: "",
-          description: ""
+          departmentId: null
         },
         validationSchema: groupSchema,
         onSubmit: (values) => {

@@ -31,7 +31,7 @@ function App() {
                   <Department />
                 </ProtectedRoute>
               } />
-              <Route path="/Groups" element=
+              <Route path="/AdminGroups" element=
               {
                 <ProtectedRoute>
                   <AdminGroup />

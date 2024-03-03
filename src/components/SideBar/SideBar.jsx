@@ -67,7 +67,7 @@ function SideBar() {
                         icon={FaLayerGroup}
                         title="All Groups"
                         active={activeItem === "All Groups"}
-                        onClick={() => handleItemClick("All Groups", "Groups")}
+                        onClick={() => handleItemClick("All Groups", "AdminGroups")}
                     />
                 )}
                 {role === "Rector" && (

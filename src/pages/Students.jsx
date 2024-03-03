@@ -1,16 +1,19 @@
 import { Avatar, Box, Button, Center, Container, Fade, Heading, Spinner, Text, VStack, useColorModeValue, useToast } from '@chakra-ui/react'
 import React from 'react'
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { deleteStudents, getStudents } from '../services/studentService';
 import {motion} from 'framer-motion'
 import { useSelector } from 'react-redux';
+import AddToGroup from '../components/Group/AddToGroup';
 
 export default function Students() {
     const toast = useToast();
 
     const {token} = useSelector(x=>x.account)
 
-    const {isLoading, data, isError, error, refetch} = useQuery("Student",()=>{
+    const queryClient = useQueryClient();
+
+    const {isLoading, data, isError, error} = useQuery("Student",()=>{
         return getStudents(token);
     },{
         cacheTime:5000,
@@ -25,8 +28,8 @@ export default function Students() {
                 duration: 3000,
                 isClosable: true,
                 position: "top-right"
-            })
-            refetch();
+            }),
+            queryClient.invalidateQueries("Student")
         },
         onError: (error) => {
             toast({
@@ -99,21 +102,25 @@ export default function Students() {
                             Student
                         </Text>
                         <Fade in>
-                            <Text
-                            color="gray.500"
-                            fontSize="lg"
-                            noOfLines={{ base: 3, md: 4 }}
-                            _groupHover={{ display: 'block' }}
-                            display="none"
-                            >
-                                {student.name} {student.surname}
-                            </Text>
-                            <Button 
-                            _groupHover={{ display: 'block' }}
-                            display="none" 
-                            onClick={() => deleteStudent(student.id)} mt={10} colorScheme='red'
-                            >Delete student
-                            </Button>
+                            <Center flexDir="column">
+                                <Text
+                                color="gray.500"
+                                fontSize="lg"
+                                noOfLines={{ base: 3, md: 4 }}
+                                _groupHover={{ display: 'block' }}
+                                display="none"
+                                >
+                                    {student.name} {student.surname}
+                                </Text>
+                                <Button 
+                                _groupHover={{ display: 'block' }}
+                                display="none" 
+                                onClick={() => deleteStudent(student.id)} mt={10} colorScheme='red'
+                                >Delete student
+                                </Button>
+                                {student.userGroups != null}
+                                <AddToGroup userId={student.id}/>
+                            </Center>
                         </Fade>
                     </VStack>
                 </Box>
