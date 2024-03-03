@@ -3,6 +3,7 @@ import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { deleteGroup, getGroup } from '../services/groupService';
+import GroupUpdate from '../components/Group/GroupUpdate';
 
 export default function AdminGroup() {
 
@@ -30,6 +31,7 @@ export default function AdminGroup() {
               position: "top-right"
           }),
           queryClient.invalidateQueries('Groups');
+          queryClient.invalidateQueries('Departments');
       },
       onError: (error) => {
           toast({
@@ -86,6 +88,7 @@ export default function AdminGroup() {
                             </Box>
                             <Flex gap={5}>
                                 <Button onClick={() => handleDeleteGroup(group.id)} colorScheme='red'>Delete</Button>
+                                <GroupUpdate groupId={group.id} initialValues={{name: group.name}} fontWeight={1} bgColor={"#AEC8CA"}/>
                             </Flex>
                     </Stack>
                 </CardBody>

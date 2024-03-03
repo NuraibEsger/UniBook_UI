@@ -28,6 +28,8 @@ export default function useAddToGroup(userId) {
             seletRef.current.value = "default"
             onClose();
             queryClient.invalidateQueries('Groups');
+            queryClient.invalidateQueries('Students')
+            queryClient.invalidateQueries('Teachers');
 
         },
         onError:(error) =>{

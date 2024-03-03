@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {motion} from 'framer-motion'
 import { deleteTeacher, getTeachers } from '../services/teacherService';
 import React from 'react'
+import AddToGroup from '../components/Group/AddToGroup';
 
 export default function Teachers() {
     const toast = useToast();
@@ -115,6 +116,7 @@ export default function Teachers() {
                                 onClick={() => handleDeleteTeacher(teacher.id)} mt={10} colorScheme='red'
                                 >Delete student
                                 </Button>
+                                <AddToGroup userId={teacher.id}/>
                             </Center>
                         </Fade>
                     </VStack>

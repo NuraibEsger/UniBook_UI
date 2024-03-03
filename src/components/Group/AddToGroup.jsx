@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Spinner } from '@chakra-ui/react';
 import { getGroup } from '../../services/groupService';
 import useAddToGroup from '../../hooks/Group/useAddToGroup';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 
 export default function AddToGroup({userId}) {
 

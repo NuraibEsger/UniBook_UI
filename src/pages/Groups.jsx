@@ -1,10 +1,10 @@
 import React from 'react'
-import useUserGroups from '../hooks/Group/useUserGroups'
 import { Box, Button, Card, CardBody, CardHeader, Center, Flex, Heading, Spinner, Stack, StackDivider, Text, useToast, } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { getUserGroupById } from '../services/userGroupService';
 import { useNavigate } from 'react-router-dom';
+import GroupUpdate from '../components/Group/GroupUpdate';
 
 export default function Groups() {
 

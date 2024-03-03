@@ -13,7 +13,7 @@ export default function Students() {
 
     const queryClient = useQueryClient();
 
-    const {isLoading, data, isError, error} = useQuery("Student",()=>{
+    const {isLoading, data, isError, error} = useQuery("Students",()=>{
         return getStudents(token);
     },{
         cacheTime:5000,
@@ -29,7 +29,7 @@ export default function Students() {
                 isClosable: true,
                 position: "top-right"
             }),
-            queryClient.invalidateQueries("Student")
+            queryClient.invalidateQueries("Students")
         },
         onError: (error) => {
             toast({
@@ -118,8 +118,7 @@ export default function Students() {
                                 onClick={() => deleteStudent(student.id)} mt={10} colorScheme='red'
                                 >Delete student
                                 </Button>
-                                {student.userGroups != null}
-                                <AddToGroup userId={student.id}/>
+                                {student.userGroups.length == 0 && <AddToGroup userId={student.id}/>}
                             </Center>
                         </Fade>
                     </VStack>

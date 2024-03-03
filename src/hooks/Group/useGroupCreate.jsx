@@ -12,7 +12,6 @@ export default function useGroupCreate() {
     const toast = useToast();
     const { token } = useSelector((x) => x.account);
     const queryClient = useQueryClient();
-
     const seletRef = useRef();
 
     const createGroup = useMutation((values) => postGroup(values, token), {
