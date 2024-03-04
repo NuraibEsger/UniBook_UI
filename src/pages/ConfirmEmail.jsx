@@ -1,41 +1,48 @@
-import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useToast } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useMutation } from 'react-query';
 import { confirmEmail } from '../services/accountService';
+import { Button, useToast } from '@chakra-ui/react';
 
-export default function ConfirmEmail() {
-    const toast = useToast();
-    const location = useLocation();
+function EmailConfirmationComponent() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('token').replace(/ /g, '+');
+  const email = searchParams.get('email');
+  const toast = useToast()
 
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const token = searchParams.get('token');
-        const email = searchParams.get('email');
+  useEffect(() => {
+  }, [token, email]);
 
-        console.log(token,email);
 
-        confirmEmail(token, email)
-            .then(() => {
-                toast({
-                    title: "Email Confirmed",
-                    description: `${email} has been successfully confirmed.`,
-                    status: "success",
-                    duration: 5000,
-                    isClosable: true,
-                });
-            })
-            .catch((error) => {
-                toast({
-                    title: "Error",
-                    description: "Failed to confirm email. Please try again later.",
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                });
-            });
-    }, [location.search, toast]);
+  const handleConfirmEmail = useMutation((data) => confirmEmail(data), {
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: "Email confirmed successfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right"
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right"
+      });
+    },
+  });
 
-    return (
-        <div>ConfirmEmail</div>
-    );
+  return (
+    <div>
+        <Button onClick={() => handleConfirmEmail.mutate({ email, token })} mt={10} backgroundColor={"#AEC8CA"}>Confirm Email</Button>
+    </div>
+  );
 }
+
+export default EmailConfirmationComponent;
