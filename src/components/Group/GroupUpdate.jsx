@@ -30,13 +30,13 @@ export default function GroupUpdate({ groupId, initialValues }) {
   return (
     <>
       <Button bgColor="#AEC8CA" onClick={onOpen}>
-        Create Group
+        Update Group
       </Button>
     
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create Group</ModalHeader>
+          <ModalHeader>Update Group</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl>

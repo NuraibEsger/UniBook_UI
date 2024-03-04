@@ -4,10 +4,13 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { deleteGroup, getGroup } from '../services/groupService';
 import GroupUpdate from '../components/Group/GroupUpdate';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminGroup() {
 
   const toast = useToast();
+
+  const navigate = useNavigate()
 
   const {token} = useSelector(x=>x.account);
 
@@ -68,6 +71,10 @@ export default function AdminGroup() {
       deleteMutation.mutate(groupId)
   }
 
+  const handleViewDetail = (groupId) =>{
+    navigate(`/Groups/${groupId}`)
+}
+
   return (
     <Center>
         <Flex mt={20} gap={300} flexWrap="wrap">
@@ -89,6 +96,9 @@ export default function AdminGroup() {
                             <Flex gap={5}>
                                 <Button onClick={() => handleDeleteGroup(group.id)} colorScheme='red'>Delete</Button>
                                 <GroupUpdate groupId={group.id} initialValues={{name: group.name}} fontWeight={1} bgColor={"#AEC8CA"}/>
+                            <Flex gap={5}>
+                                <Button onClick={() => handleViewDetail(group.id)} bgColor={"#AEC8CA"}>View Detail</Button>
+                            </Flex>
                             </Flex>
                     </Stack>
                 </CardBody>
