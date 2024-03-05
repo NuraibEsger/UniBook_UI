@@ -1,48 +1,49 @@
 import React from 'react'
 import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Spinner } from '@chakra-ui/react';
-import { getGroup } from '../../services/groupService';
-import useAddToGroup from '../../hooks/Group/useAddToGroup';
-import { useQuery, useQueryClient } from 'react-query';
+import useAddToSubject from '../../hooks/Subject/useAddToSubject'
+import { useQuery } from 'react-query';
+import { getSubjects } from '../../services/subjectService';
 
-export default function AddToGroup({userId}) {
+export default function AddToSubject({userId}) {
 
-  const { isOpen, onOpen, onClose, formik, seletRef } = useAddToGroup(userId);
+    const { isOpen, onOpen, onClose, seletRef, formik} = useAddToSubject(userId);
 
-  const { data, isLoading, isError } = useQuery('Groups', getGroup);
+    const { data, isLoading, isError } = useQuery('Subjects', getSubjects);
 
   if(isLoading){
     return <Center><Spinner/></Center>
   }
 
   if(isError){
-      toast({
-          title: "Error",
-          description: error.message,
-          status:"error",
-          duration:3000,
-          isClosable:true,
-          position:"top-right"
-      })
-  }
+    toast({
+        title: "Error",
+        description: error.message,
+        status:"error",
+        duration:3000,
+        isClosable:true,
+        position:"top-right"
+    })
+}
 
-  return (
+return (
     <>
-      <Button  _groupHover={{ display: 'block' }} mt={5} display="none"  bgColor="#AEC8CA" onClick={onOpen}>
-        Add Group
+      <Button  _groupHover={{ display: 'block' }} mt={5} display="none" bgColor="#AEC8CA" onClick={onOpen}>
+        Add Subject
       </Button>
     
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add Group</ModalHeader>
+          <ModalHeader>Add Subject</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
-              <FormLabel>Groups</FormLabel>
+              <FormLabel>Subject</FormLabel>
+
               <Select
                 ref={seletRef}
-                name="groupId"
-                value={formik.values.groupId}
+                name="subjectId"
+                value={formik.values.subjectId}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               >
@@ -52,11 +53,11 @@ export default function AddToGroup({userId}) {
                 {data.data.map((x, i) => (
                     <option key={i} value={x.id}>
                       {x.name}
-                </option>
+                    </option>
                 ))}
               </Select>
-              {formik.errors.groupId && formik.touched.groupId && (
-                <span style={{ color: "red" }}>{formik.errors.groupId}</span>
+              {formik.errors.subjectId && formik.touched.subjectId && (
+                <span style={{ color: "red" }}>{formik.errors.subjectId}</span>
               )}
             </FormControl>
           </ModalBody>

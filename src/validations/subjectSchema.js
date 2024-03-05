@@ -10,3 +10,7 @@ export const subjectSchema = Yup.object().shape({
     .max(50,"Too long!")
     .required("Required!")
 })
+
+export const addToSubjectSchema = Yup.object().shape({
+    subjectId: Yup.number().typeError("!Required").required("Required")
+})

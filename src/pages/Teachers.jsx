@@ -1,10 +1,11 @@
-import { Avatar, Box, Button, Center, Container, Fade, Heading, Spinner, Text, VStack, useColorModeValue, useToast } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Container, Divider, Fade, Heading, Spinner, Text, VStack, useColorModeValue, useToast } from '@chakra-ui/react'
 import { useMutation, useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import {motion} from 'framer-motion'
 import { deleteTeacher, getTeachers } from '../services/teacherService';
 import React from 'react'
 import AddToGroup from '../components/Group/AddToGroup';
+import AddToSubject from '../components/Subject/AddToSubject';
 
 export default function Teachers() {
     const toast = useToast();
@@ -108,7 +109,7 @@ export default function Teachers() {
                                 _groupHover={{ display: 'block' }}
                                 display="none"
                                 >
-                                    {teacher.name} {teacher.surname}
+                                    {teacher.name} {teacher.surname} 
                                 </Text>
                                 <Button 
                                 _groupHover={{ display: 'block' }}
@@ -117,6 +118,8 @@ export default function Teachers() {
                                 >Delete student
                                 </Button>
                                 <AddToGroup userId={teacher.id}/>
+                                <Divider />
+                                <AddToSubject userId ={teacher.id} />
                             </Center>
                         </Fade>
                     </VStack>

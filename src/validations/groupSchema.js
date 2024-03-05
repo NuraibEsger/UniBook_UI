@@ -9,5 +9,5 @@ export const groupSchema = Yup.object().shape({
 })
 
 export const addToGroupSchema = Yup.object().shape({
-    groupId: Yup.number().typeError("!Required").required("Required")
+    subjectId: Yup.number().typeError("!Required").required("Required")
 })

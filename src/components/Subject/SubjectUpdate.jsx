@@ -5,10 +5,6 @@ import useSubjectUpdate from '../../hooks/Subject/useSubjectUpdate';
 import { useSelector } from 'react-redux';
 export default function SubjectUpdate({ subjectId, initialValues }) {
 
-  const { role } = useSelector(x => x.account);
-
-  
-
   const { isOpen, onOpen, onClose, formik } = useSubjectUpdate(subjectId, initialValues);
 
   return (

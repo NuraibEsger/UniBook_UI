@@ -16,3 +16,12 @@ export const deleteTeacher = (userId, token) => {
         },
     })
 }
+
+export const addToSubject = (data, userId, token) => {
+        return httpClient.post(`/teacher/${userId}`, data ,{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    )
+}
