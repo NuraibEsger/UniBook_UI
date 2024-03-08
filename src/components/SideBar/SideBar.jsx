@@ -45,13 +45,16 @@ function SideBar() {
                     active={activeItem === "Home"}
                     onClick={() => handleItemClick("Home", "/")}
                 />
-                <NavItem
+                {role === "Teacher" && 
+                (
+                    <NavItem
                     navSize={navSize}
                     icon={FiCalendar}
-                    title="Calendar"
-                    active={activeItem === "Calendar"}
-                    onClick={() => handleItemClick("Calendar", "Calendar")}
+                    title="Exams"
+                    active={activeItem === "Exams"}
+                    onClick={() => handleItemClick("Exams", "Exams")}
                 />
+                )}
                 {role === "Rector" && (
                     <NavItem
                         navSize={navSize}

@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import SubjectCreate from './Subject/SubjectCreate';
 import DepartmentCreate from './Department/DepartmentCreate';
 import GroupCreate from './Group/GroupCreate';
+import ExamCreate from './Exam/ExamCreate';
 
 function Header() {
 
@@ -38,6 +39,7 @@ function Header() {
                 {role === 'Rector' && <DepartmentCreate />}
                 {role === 'Rector' && <GroupCreate />}
                 {role === 'Rector' && <SubjectCreate />}
+                {role === 'Teacher' && <ExamCreate />}
                 <SignInModal />
                 {userName ? (
                     <Menu>

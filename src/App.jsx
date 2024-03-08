@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound'
 import Users from './pages/Users'
 import Students from './pages/Students';
 import Teachers from './pages/Teachers';
-import ProtectedRoute, { ProtectedRouteForStuTeach } from './utils/ProtectedRoute';
+import ProtectedRoute, {ProtectedRouteForStuTeach } from './utils/ProtectedRoute';
 import Subjects from './pages/Subjects';
 import ConfirmEmail from './pages/ConfirmEmail';
 import UserGroup from './pages/UserGroup';
@@ -15,6 +15,7 @@ import Groups from './pages/Groups';
 import GroupDetail from './pages/GroupDetail';
 import Department from './pages/Department';
 import AdminGroup from './pages/AdminGroup';
+import Exams from './pages/Exams';
 
 function App() {
   const queryClient = new QueryClient();
@@ -25,6 +26,12 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
+              <Route path="/Exams" element=
+              {
+                <ProtectedRouteForStuTeach>
+                  <Exams />
+                </ProtectedRouteForStuTeach>
+              } />
               <Route path="/Departments" element=
               {
                 <ProtectedRoute>
