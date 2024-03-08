@@ -51,7 +51,6 @@ export default function useAddToGroup(userId) {
         validationSchema: addToGroupSchema,
         onSubmit: (values) => {
           addToGroupMutation.mutate({userId, ...values});
-          console.log(values);
         }
       });
       

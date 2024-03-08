@@ -37,6 +37,10 @@ export default function GroupDetail() {
 
     const group = data.data;
 
+    // Filter userGroups based on UserRole
+    const studentGroups = group.userGroups.filter(ug => ug.userRole === "Student");
+    const teacherGroups = group.userGroups.filter(ug => ug.userRole === "Teacher");
+
     return (
         <Center flexDir="column ">
             <Text
@@ -46,10 +50,11 @@ export default function GroupDetail() {
                 fontWeight="400"
                 my="1rem"
                 >
-                {group.name}'s students page
+                {group.name}'s group page
             </Text>
- 
-            <TableContainer justify="center" mx="auto">
+
+            {/* Student Table */}
+            <TableContainer justify="center" mx="auto" my="1rem">
                 <Table size='lg'>
                     <Thead>
                         <Tr>
@@ -58,10 +63,32 @@ export default function GroupDetail() {
                         </Tr>
                     </Thead>
                     <Tbody >
-                        {group.userGroups.map((ug) => (
+                        {studentGroups.map((ug) => (
                             <Tr key={ug.id}>
                                 <Td>{ug.user}</Td>
                                 <Td>Student</Td>
+                            </Tr>
+                        ))}
+                    </Tbody>
+                </Table>
+            </TableContainer>
+
+            {/* Teacher Table */}
+            <TableContainer justify="center" mx="auto" my="1rem">
+                <Table size='lg'>
+                    <Thead>
+                        <Tr>
+                            <Th>Email</Th>
+                            <Th>Role</Th>
+                            <Th>Subject</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody >
+                        {teacherGroups.map((ug) => (
+                            <Tr key={ug.id}>
+                                <Td>{ug.user}</Td>
+                                <Td>Teacher</Td>
+                                <Td>{ug.subjectName}</Td>
                             </Tr>
                         ))}
                     </Tbody>

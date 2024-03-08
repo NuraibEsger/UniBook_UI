@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { addToSubject } from '../../services/teacherService';
 import { useFormik } from 'formik';
-import { addToGroupSchema } from '../../validations/groupSchema';
+import { addToSubjectSchema } from '../../validations/subjectSchema';
 
 export default function useAddToSubject(userId) {
 
@@ -45,7 +45,7 @@ export default function useAddToSubject(userId) {
         initialValues: {
           subjectId: null
         },
-        validationSchema: addToGroupSchema,
+        validationSchema: addToSubjectSchema,
         onSubmit: (values) => {
             addSubject.mutate(values);
         }

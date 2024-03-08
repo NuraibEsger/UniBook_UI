@@ -119,15 +119,6 @@ export default function Users() {
                         <Heading fontSize="xl" fontFamily="body" textTransform="capitalize" noOfLines={2}>
                             {user.email}
                         </Heading>
-                        <Text
-                        color="gray.500"
-                        fontSize="lg"
-                        noOfLines={{ base: 3, md: 4 }}
-                        _groupHover={{ display: 'none' }}
-                        display="block"
-                        >
-                            Student
-                        </Text>
                         <Fade in>
                             <Center flexDir="column">
                                 <Text
