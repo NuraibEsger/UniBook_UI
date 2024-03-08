@@ -22,7 +22,6 @@ export function ProtectedRouteForTeachers({children}){
 
 export function ProtectedRouteForStuTeach({children}){
   const {role} = useSelector((x) => x.account)
-  console.log(role);
   if(role !== "Student" && role !== "Teacher") return <Navigate to={'/*'} />
 
   return(

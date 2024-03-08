@@ -1,7 +1,6 @@
 import { httpClient } from "../utils/httpClient";
 
 export const getExam = (id, token) => {
-    console.log(id);
     return httpClient.get(`/exam?id=${id}`, {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -18,8 +17,8 @@ export const getExamById = (Id, token) => {
     });
 };
 
-export const postExam = (data, token) =>{
-    return httpClient.post(`/exam`, data, {
+export const postExam = (id, data, token) =>{
+    return httpClient.post(`/exam/${id}`, data, {
         headers: {
             Authorization: `Bearer ${token}`,
         },

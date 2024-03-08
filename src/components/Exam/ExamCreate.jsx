@@ -1,15 +1,22 @@
 import React from 'react';
-import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Spinner } from '@chakra-ui/react';
+import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Spinner, useToast } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import useExamCreate from '../../hooks/Exam/useExamCreate';
-import { getGroup } from '../../services/groupService';
+import { getUserGroupById } from '../../services/userGroupService';
 import { useSelector } from 'react-redux';
 
 export default function ExamCreate() {
 
+  const {id , token} = useSelector(x=>x.account);
+
+  const {isLoading, data, isError, error} = useQuery("UserGroups", () =>{
+    return getUserGroupById( id, token)
+  })
+
+  const toast = useToast();
+
   const { isOpen, onOpen, onClose, formik, seletRef } = useExamCreate();
 
-  const { data, isLoading, isError } = useQuery('Groups', getGroup);
 
   if(isLoading){
     return <Center><Spinner/></Center>
@@ -66,7 +73,7 @@ export default function ExamCreate() {
                 </option>
                 {data.data.map((x, i) => (
                     <option key={i} value={x.id}>
-                      {x.name}
+                      {x.groupName}
                     </option>
                 ))}
               </Select>

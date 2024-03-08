@@ -16,8 +16,6 @@ export default function Department() {
     const {isLoading, data, isError, error} = useQuery("Departments", () =>{
         return getDepartments(token)
 
-    },{
-        cacheTime:5000,
     })
 
     const deleteMutation = useMutation((departmentId) => deleteDepartment(departmentId, token),{

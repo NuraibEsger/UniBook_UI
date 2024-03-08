@@ -2,23 +2,22 @@ import React from 'react'
 import { Box, Button, Card, CardBody, CardHeader, Center, Flex, Heading, Spinner, Stack, StackDivider, Text, useToast, } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
 import { getExam } from '../services/examService';
+import useExamDelete from '../hooks/Exam/useExamDelete';
 
 export default function Exams() {
 
     const toast = useToast();
-  
+
     const { id, token } = useSelector(x=>x.account);
 
-    const navigate = useNavigate();
+    const {deleteMutation} = useExamDelete()
 
     const {isLoading, data, isError, error} = useQuery("Exams", () =>{
         return getExam( id, token)
     },{
         cacheTime:5000,
     })
-
 
     if(isLoading){
       return <Center><Spinner/></Center>
@@ -39,10 +38,6 @@ export default function Exams() {
       return <Center><Heading>No data available</Heading ></Center>
     }
 
-    const handleViewDetail = (examId) =>{
-        navigate(`/Exams/${examId}`)
-    }
-
     function getMonthName(monthIndex) {
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         return monthNames[monthIndex];
@@ -52,6 +47,10 @@ export default function Exams() {
       function padZero(num) {
         return num.toString().padStart(2, '0');
       }
+
+      const handleDeleteExam = (examId) =>{
+        deleteMutation.mutate(examId)
+    }
 
   return (
     <Center>
@@ -72,15 +71,18 @@ export default function Exams() {
         <Stack flexDir="column" flexWrap="wrap" gap={5} divider={<StackDivider />} spacing='4'>
           <Box>
             <Heading justifyContent="center" size='x' textTransform='uppercase'>
-              {e.groupName}
+              Group: {e.groupName}
             </Heading>
-            <Text pt='2' fontSize='m'>
-              {formattedDate}
+            <Text pt='2' fontSize='lg'>
+              Subject: {e.subjectName}
             </Text>
+            <Text pt='2' fontSize='m'>
+              Date: {formattedDate}
+            </Text>
+            <Flex gap={5}>
+                <Button onClick={() => handleDeleteExam(e.id)} colorScheme='red'>Delete</Button>
+            </Flex>
           </Box>
-          <Flex gap={5}>
-            <Button onClick={() => handleViewDetail(ug.examId)} bgColor={"#AEC8CA"}>View Detail</Button>
-          </Flex>
         </Stack>
       </CardBody>
     </Card>

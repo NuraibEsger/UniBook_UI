@@ -13,10 +13,8 @@ export default function Groups() {
 
     const navigate = useNavigate();
 
-    const {isLoading, data, isError, error} = useQuery("Groups", () =>{
+    const {isLoading, data, isError, error} = useQuery("UserGroups", () =>{
         return getUserGroupById( id, token)
-    },{
-        cacheTime:5000,
     })
 
 
