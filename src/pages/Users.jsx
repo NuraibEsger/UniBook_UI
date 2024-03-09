@@ -12,7 +12,7 @@ export default function Users() {
     
     const { token } = useSelector(x => x.account);
 
-    const { isLoading, data, isError, error, refetch, isFetching } = useQuery("Users", () =>{
+    const { isLoading, data, isError, error, refetch } = useQuery("Users", () =>{
         return getUsers(token)
     },{
         cacheTime: 5000,

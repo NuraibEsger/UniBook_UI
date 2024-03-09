@@ -1,6 +1,5 @@
-import { Avatar, Button, Flex, Icon, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Stack, Tab, TabList, Tabs } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, Icon, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Stack, Tab, TabList, Tabs } from '@chakra-ui/react'
 import React from 'react'
-import { SettingsIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from 'react-redux'
 import SignInModal from './Account/SignInModal'
 import { logoutAction } from "../redux/slices/accountSlice";
@@ -8,8 +7,10 @@ import RegisterModal from './Account/RegisterModal'
 import { useNavigate } from 'react-router-dom'
 import SubjectCreate from './Subject/SubjectCreate';
 import DepartmentCreate from './Department/DepartmentCreate';
-import GroupCreate from './Group/GroupCreate';
+import Logo from '../assets/images/Logo.png'
 import ExamCreate from './Exam/ExamCreate';
+import GroupCreate from './Group/GroupCreate';
+
 
 function Header() {
 
@@ -35,6 +36,7 @@ function Header() {
                 </TabList>
             </Tabs>
         </Flex>
+          <Image h="110px" src={Logo} alt='Dan Abramov' />
         <Flex gap={5} alignItems={'center'}>
                 {role === 'Rector' && <DepartmentCreate />}
                 {role === 'Rector' && <GroupCreate />}
@@ -57,7 +59,6 @@ function Header() {
                   <MenuList>
                     <MenuItem cursor={"default"}>{userName}</MenuItem>
                     <MenuItem onClick={() => navigate("/Settings")}>
-                    <Icon as={SettingsIcon} mr={2} /> Settings
                     </MenuItem>
                     <MenuDivider />
                     <MenuItem onClick={() => dispatch(logoutAction())}>
@@ -68,7 +69,6 @@ function Header() {
             ):(
                 <RegisterModal />
             )}
-            
           </Flex>
     </Flex>
   )

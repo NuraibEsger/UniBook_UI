@@ -1,12 +1,11 @@
 import { httpClient } from "../utils/httpClient";
 
 export const getDepartments = (token) => {
-
     return httpClient.get("/department",{
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+});
 };
 
 export const postDepartment = (data, token) =>{

@@ -9,7 +9,7 @@ export default function Layout() {
     <Grid>
         <Header />
         <Flex 
-            gap={60}
+            gap={{ base: 5, md: 20, lg: 60 }}
         >
             <SideBar />
             <Outlet />

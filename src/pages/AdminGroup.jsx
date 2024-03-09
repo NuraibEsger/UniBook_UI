@@ -87,10 +87,10 @@ export default function AdminGroup() {
                     <Stack flexDir="column" flexWrap="wrap" gap={5} divider={<StackDivider />} spacing='4'>
                             <Box key={group.id}>
                                 <Heading justifyContent="center" size='x' textTransform='uppercase'>
-                                    {group.name}
+                                    Group'name: {group.name}
                                 </Heading>
                                 <Text pt='2' fontSize='m'>
-                                    {group.departmentName}
+                                    Department's name: {group.departmentName}
                                 </Text>
                             </Box>
                             <Flex gap={5}>

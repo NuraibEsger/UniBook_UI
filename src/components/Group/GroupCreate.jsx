@@ -1,13 +1,19 @@
 import React from 'react';
-import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Spinner } from '@chakra-ui/react';
+import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Spinner, useToast } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { getDepartments } from '../../services/departmentService';
 import useGroupCreate from '../../hooks/Group/useGroupCreate';
+import { useSelector } from 'react-redux';
 
 export default function GroupCreate() {
+
+  const toast = useToast();
   const { isOpen, onOpen, onClose, formik, seletRef } = useGroupCreate();
 
-  const { data, isLoading, isError } = useQuery('Departments', getDepartments);
+  const {token} = useSelector(x=>x.account);
+  const { data, isLoading, isError, error } = useQuery('Departments', () => {
+    return getDepartments(token)
+  });
 
   if(isLoading){
     return <Center><Spinner/></Center>

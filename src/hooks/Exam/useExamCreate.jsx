@@ -27,7 +27,7 @@ export default function useExamCreate() {
           formik.resetForm();
           seletRef.current.value = "default"
           onClose();
-          queryClient.invalidateQueries('UserGroups');
+          queryClient.invalidateQueries('Exams');
         },
         onError: (error) => {
           toast({

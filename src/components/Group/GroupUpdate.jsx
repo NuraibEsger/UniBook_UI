@@ -3,10 +3,14 @@ import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalC
 import { getDepartments } from '../../services/departmentService';
 import { useQuery } from 'react-query';
 import useGroupUpdate from '../../hooks/Group/useGroupUpdate';
+import { useSelector } from 'react-redux';
 
 export default function GroupUpdate({ groupId, initialValues }) {
 
-  const { data, isLoading, isError } = useQuery('Departments', getDepartments);
+  const {token} = useSelector(x=>x.account);
+  const { data, isLoading, isError } = useQuery('Departments', () => {
+    return getDepartments(token)
+  });
 
   const { isOpen, onOpen, onClose, formik, seletRef}  = useGroupUpdate(groupId, initialValues);
 

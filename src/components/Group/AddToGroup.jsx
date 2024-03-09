@@ -2,13 +2,18 @@ import React from 'react'
 import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Spinner } from '@chakra-ui/react';
 import { getGroup } from '../../services/groupService';
 import useAddToGroup from '../../hooks/Group/useAddToGroup';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
+import { useSelector } from 'react-redux';
 
 export default function AddToGroup({userId}) {
 
+  const {token} = useSelector(x=>x.account);
+
   const { isOpen, onOpen, onClose, formik, seletRef } = useAddToGroup(userId);
 
-  const { data, isLoading, isError } = useQuery('Groups', getGroup);
+  const { data, isLoading, isError } = useQuery('Groups', () => {
+    return getGroup(token)
+  });
 
   if(isLoading){
     return <Center><Spinner/></Center>

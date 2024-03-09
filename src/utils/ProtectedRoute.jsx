@@ -29,3 +29,12 @@ export function ProtectedRouteForStuTeach({children}){
   )
 }
 
+export function ProtectedRouteForAll({children}){
+  const {role} = useSelector((x) => x.account)
+  if(role !== "Student" && role !== "Teacher" && role !== "Rector") return <Navigate to={'/*'} />
+
+  return(
+    children
+  )
+}
+

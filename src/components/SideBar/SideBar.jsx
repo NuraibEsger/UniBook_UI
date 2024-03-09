@@ -10,7 +10,7 @@ function SideBar() {
     const [navSize, changeNavSize] = useState("large");
     const [activeItem, setActiveItem] = useState("Dashboard"); // Initial active item
     const navigate = useNavigate();
-    const {role} = useSelector(x=>x.account)
+    const { role } = useSelector(x => x.account)
 
     const handleItemClick = (title, route) => {
         setActiveItem(title);
@@ -45,16 +45,26 @@ function SideBar() {
                     active={activeItem === "Home"}
                     onClick={() => handleItemClick("Home", "/")}
                 />
-                {role === "Teacher" && 
-                (
-                    <NavItem
-                    navSize={navSize}
-                    icon={FiCalendar}
-                    title="Exams"
-                    active={activeItem === "Exams"}
-                    onClick={() => handleItemClick("Exams", "Exams")}
-                />
-                )}
+                {role === "Teacher" &&
+                    (
+                        <NavItem
+                            navSize={navSize}
+                            icon={FiCalendar}
+                            title="Exams"
+                            active={activeItem === "Exams"}
+                            onClick={() => handleItemClick("Exams", "Exams")}
+                        />
+                    )}
+                {role === "Student" &&
+                    (
+                        <NavItem
+                            navSize={navSize}
+                            icon={FiCalendar}
+                            title="Exams"
+                            active={activeItem === "Exams"}
+                            onClick={() => handleItemClick("Exams", "Exams")}
+                        />
+                    )}
                 {role === "Rector" && (
                     <NavItem
                         navSize={navSize}
@@ -128,9 +138,7 @@ function SideBar() {
                         onClick={() => handleItemClick("Groups", "Groups")}
                     />
                 )}
-
             </Flex>
-
             <Flex p="5%" flexDir="column" w="100%" alignItems={navSize === "small" ? "center" : "flex-start"} mb={4}>
             </Flex>
         </Flex>

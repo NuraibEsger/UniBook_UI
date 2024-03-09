@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound'
 import Users from './pages/Users'
 import Students from './pages/Students';
 import Teachers from './pages/Teachers';
-import ProtectedRoute, {ProtectedRouteForStuTeach } from './utils/ProtectedRoute';
+import ProtectedRoute, {ProtectedRouteForAll, ProtectedRouteForStuTeach } from './utils/ProtectedRoute';
 import Subjects from './pages/Subjects';
 import ConfirmEmail from './pages/ConfirmEmail';
 import UserGroup from './pages/UserGroup';
@@ -76,9 +76,9 @@ function App() {
               } />
               <Route path='/Groups/:id' element=
               {
-                <ProtectedRouteForStuTeach>
+                <ProtectedRouteForAll>
                   <GroupDetail />
-                </ProtectedRouteForStuTeach>
+                </ProtectedRouteForAll>
               } />
               <Route path='/UserGroup/:id' element={<UserGroup />}/>
               <Route path='EmailConfirmation' element={<ConfirmEmail />} />

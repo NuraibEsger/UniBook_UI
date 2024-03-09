@@ -9,15 +9,15 @@ export default function Department() {
 
     const toast = useToast();
 
-    const {token} = useSelector(x=>x.account);
+    const { token } = useSelector(x => x.account);
 
-    const queryClient = useQueryClient();
-
-    const {isLoading, data, isError, error} = useQuery("Departments", () =>{
+    const { isLoading, data, isError, error } = useQuery("Departments", () =>{
         return getDepartments(token)
-
-    })
-
+    },{
+        cacheTime: 5000,
+    });
+    
+    const queryClient = useQueryClient();
     const deleteMutation = useMutation((departmentId) => deleteDepartment(departmentId, token),{
         onSuccess: () => {
             toast({
