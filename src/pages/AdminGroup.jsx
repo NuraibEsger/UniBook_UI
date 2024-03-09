@@ -95,7 +95,7 @@ export default function AdminGroup() {
                             </Box>
                             <Flex gap={5}>
                                 <Button onClick={() => handleDeleteGroup(group.id)} colorScheme='red'>Delete</Button>
-                                <GroupUpdate groupId={group.id} initialValues={{name: group.name}} fontWeight={1} bgColor={"#AEC8CA"}/>
+                                <GroupUpdate groupId={group.id} initialValues={{name: group.name , departmentId: group.departmentId}} fontWeight={1} bgColor={"#AEC8CA"}/>
                             <Flex gap={5}>
                                 <Button onClick={() => handleViewDetail(group.id)} bgColor={"#AEC8CA"}>View Detail</Button>
                             </Flex>

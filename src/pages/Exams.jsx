@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { getExam } from '../services/examService';
 import useExamDelete from '../hooks/Exam/useExamDelete';
+import ExamUpdate from '../components/Exam/ExamUpdate';
 
 export default function Exams() {
     const toast = useToast();
@@ -75,9 +76,7 @@ export default function Exams() {
                                         <>
                                             <Flex gap={5} mt={5}>
                                                 <Button onClick={() => handleDeleteExam(e.id)} colorScheme='red'>Delete</Button>
-                                            </Flex>
-                                            <Flex gap={5} mt={5}>
-                                                <Button >Update</Button>
+                                                <ExamUpdate examId={e.id} initialValues={{dateTime: e.dateTime, groupId: e.groupId}} fontWeight={1} bgColor={"#AEC8CA"}/>
                                             </Flex>
                                         </>
                                         }

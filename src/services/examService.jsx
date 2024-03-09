@@ -8,7 +8,6 @@ export const getExam = (id, token) => {
     });
 };
 
-
 export const getExamById = (Id, token) => {
     return httpClient.get(`/exam/${Id}`, {
         headers: {

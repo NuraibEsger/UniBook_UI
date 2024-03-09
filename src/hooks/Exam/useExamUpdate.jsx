@@ -1,31 +1,29 @@
 import { useDisclosure, useToast } from '@chakra-ui/react';
+import React, { useRef } from 'react'
 import { useMutation, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
-import { useRef } from 'react';
-import { putGroup } from '../../services/groupService';
+import { putExam } from '../../services/examService';
+import { examSchema } from '../../validations/examSchema';
 import { useFormik } from 'formik';
-import { groupSchema } from '../../validations/groupSchema';
 
-export default function useGroupUpdate(groupId, initialValues) {
-    
+export default function useExamUpdate(examId, initialValues) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const toast = useToast();
-    const { token } = useSelector((x) => x.account);
+    const { id, token } = useSelector((x) => x.account);
     const queryClient = useQueryClient();
     const seletRef = useRef();
 
-    const updateGroup = useMutation((values) => putGroup(groupId, values, token), {
+    const updateExam = useMutation((values) => putExam(id, {examId, ...values}, token), {
       onSuccess: () => {
         toast({
           title: "Success",
-          description: "Group created successfully",
+          description: "Exam updated successfully",
           status: "success",
           duration: 3000,
           isClosable: true,
           position: "top-right"
         });
-        queryClient.invalidateQueries('Groups');
-        queryClient.invalidateQueries('Departments');
+        queryClient.invalidateQueries('Exams');
         seletRef.current.value = "default"
         onClose();
       },
@@ -43,12 +41,12 @@ export default function useGroupUpdate(groupId, initialValues) {
 
     const formik = useFormik({
       initialValues: {
-        name: initialValues.name,
-        departmentId: initialValues.departmentId
+        groupId: initialValues.groupId,
+        dateTime: initialValues.dateTime
       },
-      validationSchema: groupSchema,
+      validationSchema: examSchema,
       onSubmit: (values) => {
-        updateGroup.mutate(values);
+        updateExam.mutate(values);
       }
     });
 
